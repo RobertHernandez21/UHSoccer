@@ -4,7 +4,7 @@
 
   <div class="flex items-center cursor-pointer"> 
     <span class="text-green-500 text-xl mr-l"></span>
-    <img src="@/assets/crest4.png" alt="Bootstrap" width="100" height="10">
+    <img src="@/assets/crest.png" alt="Bootstrap" width="100" height="10">
     
   </div>
 
