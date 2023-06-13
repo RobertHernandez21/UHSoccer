@@ -56,7 +56,7 @@ mounted() {
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0,0.4);
-    z-index: 10;
+    ;
   }
   .slide .image{
     height: 100%;
@@ -70,7 +70,7 @@ mounted() {
     transform: translate(-50%, -50%);
     text-align: center;
     width: 100%;
-    z-index: 100;
+    
   }
   .image-date span.text{
     font-size: 14px;
