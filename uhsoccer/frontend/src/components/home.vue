@@ -1,27 +1,16 @@
 <template>
   <div>
-    <v-carousel>
-  <v-carousel-item
-    src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-    cover
-  ></v-carousel-item>
-
-  <v-carousel-item
-    src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg"
-    cover
-  ></v-carousel-item>
-
-  <v-carousel-item
-    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-    cover
-  ></v-carousel-item>
-</v-carousel>
+    <Carousel />
   </div>
   </template>
   
   <script>
+  import Carousel from '@/components/Carousel.vue'
   export default {
-  name: 'home'
+  name: 'home',
+  components:{
+    Carousel,
+  },
   }
   </script>
   
