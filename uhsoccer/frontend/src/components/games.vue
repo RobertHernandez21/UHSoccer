@@ -1,5 +1,8 @@
 <template>
-    <h1>Games</h1>
+    <h1>Games
+      Test
+    </h1>
+    
   </template>
   
   <script>
