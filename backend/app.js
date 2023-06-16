@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan') 
+const Event = require('./models/event')
 
 const cors = require('cors')
 
@@ -23,13 +24,24 @@ app.use(
   })
 
 
-  const PORT = process.env.PORT || 3000
+  const PORT = process.env.PORT
   
 app.use(express.json())
 app.use(morgan('dev'))
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`)
+})
+
+app.get('/event', async(req,res) =>{
+  try {
+    const event = await Event.find({})
+    res.status(200).json(event)
+    console.log(event)
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: error.message})
+  }
 })
 
 // error handler
