@@ -32,6 +32,9 @@
           </tbody>
         </table>
       </div>
+      <Button> 
+      <router-link class="link text-xl" :to="{name: 'eventform'}">Get Started</router-link> 
+    </Button>
     </div>
 </template>
 
