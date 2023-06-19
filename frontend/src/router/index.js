@@ -29,6 +29,12 @@ const router = createRouter({
       name: 'contact',
       component: () => import('@/components/contact.vue'),
     },
+    {
+      path: '/eventdetails/:id',
+      name: 'eventdetails',
+      props: true,
+      component: () => import('@/components/eventdetails.vue')
+    },
   ]
 })
 

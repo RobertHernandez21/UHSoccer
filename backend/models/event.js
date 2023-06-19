@@ -3,10 +3,6 @@ const mongoose = require('mongoose')
 const eventDataSchema = mongoose.Schema(
     {
         _id: { type: String, default: uuid.v1 },
-        name: {
-            type: String,
-            required: true
-          },
           date: {
             type: Date,
             required: true

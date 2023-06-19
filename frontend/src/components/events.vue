@@ -13,19 +13,20 @@
               <th class="p-4 text-left">Event Date</th>
               <th class="p-4 text-left">Event Location</th>
               <th class="p-4 text-left">Event Time</th>
-              <th class="p-4 text-left">Event oppenent</th>
+              <th class="p-4 text-left">Event opponent</th>
               <th class="p-4 text-left">Event Result</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-300">
             <tr
+            @click="editEvent(event._id)"
               v-for="event in events"
               :key="event._id"
             >
               <td class="p-2 text-left">{{ formattedDate(event.date) }}</td>
               <td class="p-2 text-left">{{ event.location}}</td>
               <td class="p-2 text-left">{{ event.time }}</td>
-              <td class="p-2 text-left">{{ event.oppenent }}</td>
+              <td class="p-2 text-left">{{ event.opponent }}</td>
               <td class="p-2 text-left">{{ event.result }}</td>
             </tr>
           </tbody>
@@ -64,6 +65,9 @@ methods:{
       return dt
         .setZone(DateTime.now().zoneName, { keepLocalTime: true })
         .toLocaleString()
+    },
+    editEvent(eventID) {
+      this.$router.push({ name: 'eventdetails', params: { id: eventID } })
     },
   }
 }
