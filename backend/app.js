@@ -80,6 +80,21 @@ app.put('/event/:id', async(req,res) =>{
   }
 })
 
+app.delete('/event/:id', async(req,res) =>{
+  try {
+    const {id} = req.params
+    const event = await Event.findByIdAndDelete(id, req.body)
+    if (!event){
+      return res.status(404).json({message: `can not find event with ID ${id}`})
+    }
+    res.status(200).json(event)
+    console.log(event)
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: error.message})
+  }
+})
+
 // error handler
 app.use(function (err, req, res, next) {
   // logs error and error code to console

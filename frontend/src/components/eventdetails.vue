@@ -190,6 +190,12 @@ export default {
         this.$router.back()
       })
     },
+    eventDelete() {
+      axios.delete(`${apiURL}/event/${this.id}`).then(() => {
+        alert('Event has been deleted.')
+        this.$router.back()
+      })
+    },
     },
     validations() {
     return {
