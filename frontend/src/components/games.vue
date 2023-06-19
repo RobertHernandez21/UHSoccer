@@ -1,13 +1,17 @@
 <template>
-    <h1>Games
-      Test
-    </h1>
+    <Event />
     
   </template>
   
   <script>
+  import Event from '@/components/events.vue'
   export default {
-  name: 'games'
+  name: 'games',
+  components:{
+    Event
+  }
+
+
   }
   </script>
   
