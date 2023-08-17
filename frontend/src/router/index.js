@@ -40,6 +40,11 @@ const router = createRouter({
       name: 'eventform',
       component: () => import('@/components/eventform.vue'),
     },
+    {
+      path: '/updateroster',
+      name: 'updateroster',
+      component: () => import('@/components/updateroster.vue'),
+    },
   ]
 })
 
