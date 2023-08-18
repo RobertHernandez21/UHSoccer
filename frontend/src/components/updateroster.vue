@@ -13,13 +13,24 @@
             </div>
           </div>
           <div class="form-group row">
-            <div class="col-lg-2">
-              <input type="file" ref="upl" class="form-control-file" accept="image/*" required>
-            </div>
-          </div>
+  <div class="col-md-1">
+    <label for="position" class="col-sm-2 col-form-label">Position</label>
+  </div>
+  <div class="col-sm-3">
+    <input v-model="position" type="text" name="position" placeholder="position" class="form-control" required>
+  </div>
+</div>
+<div class="form-group row">
+  <div class="col-md-1">
+    <label for="number" class="col-sm-2 col-form-label">Number</label>
+  </div>
+  <div class="col-sm-3">
+    <input v-model="number" type="number" name="number" placeholder="number" class="form-control" required>
+  </div>
+</div>           
           <div class="form-group row">
             <div class="col-lg-2">
-              <input type="file" ref="upl1" class="form-control-file" accept="image/*" required>
+              <input type="file" ref="upl" class="form-control-file" accept="image/*" required>
             </div>
           </div>
           <div class="form-group row">
@@ -34,6 +45,8 @@
           <div class="thumbnail">
             <div class="caption">
               <h3>{{ item.Name }}</h3>
+              <h3>{{ item.Position }}</h3>
+              <h3>{{ item.Number }}</h3>
               <img :src=" 'http://localhost:3001/uploads/' + item.image1" class="img-thumbnail">
               <br>
               <button @click="deleteItem(item._id)" class="btn btn-danger">Delete</button>
@@ -51,6 +64,8 @@
     data() {
       return {
         title: '',
+        position: '', // Add this line
+        number: '',   // Add this line
         data: [],
       };
     },
@@ -58,8 +73,9 @@
       async uploadData() {
         const formData = new FormData();
         formData.append('title', this.title);
+        formData.append('position', this.position); // Add this line
+        formData.append('number', this.number);     // Add this line
         formData.append('upl', this.$refs.upl.files[0]);
-        formData.append('upl1', this.$refs.upl1.files[0]);
   
         try {
           await axios.post(`${apiURL}/updateroster`, formData);

@@ -151,6 +151,8 @@ app.post('/updateroster', upload.any(), async (req, res) => {
     const detail = new Detail({
       unique_id: c,
       Name: req.body.title,
+      Position: req.body.position, 
+      Number: req.body.number, 
       image1: req.files[0] && req.files[0].filename ? req.files[0].filename : ''
     });
 

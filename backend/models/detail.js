@@ -4,9 +4,9 @@ let Schema = mongoose.Schema;
 detailSchema = new Schema( {
 	unique_id:Number,
 	Name: String,
+	Position: String, // Add this line for "Position"
+  	Number: Number, 
 	image1:String,
-	image2:String,
-	image3:String,
 	added_date:{
 		type: Date,
 		default: Date.now
