@@ -29,7 +29,7 @@ data() {
   methods: {
     async fetchData() {
       try {
-        const response = await axios.get(`${apiURL}/updateroster`);
+        const response = await axios.get(`${apiURL}/createroster`);
         this.data = response.data;
       } catch (error) {
         console.error('Error fetching data:', error);

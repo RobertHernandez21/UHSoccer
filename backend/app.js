@@ -129,7 +129,7 @@ app.use('/uploads', express.static('uploads'));
 // view engine setup
 
 
-app.get('/updateroster', async (req, res) => {
+app.get('/createroster', async (req, res) => {
   try {
     const detail = await Detail.find({})
     res.status(200).json(detail)
