@@ -45,6 +45,11 @@ const router = createRouter({
       name: 'updateroster',
       component: () => import('@/components/updateroster.vue'),
     },
+    {
+      path: '/createroster',
+      name: 'createroster',
+      component: () => import('@/components/createroster.vue'),
+    },
   ]
 })
 

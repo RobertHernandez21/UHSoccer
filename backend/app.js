@@ -139,7 +139,7 @@ app.get('/updateroster', async (req, res) => {
   }
 });
 
-app.post('/updateroster', upload.any(), async (req, res) => {
+app.post('/createroster', upload.any(), async (req, res) => {
   try {
     if (!req.body && !req.files) {
       return res.json({ success: false });
@@ -157,7 +157,7 @@ app.post('/updateroster', upload.any(), async (req, res) => {
     });
 
     await detail.save();
-    res.redirect('/updateroster');
+    res.redirect('/createroster');
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'An error occurred' });
@@ -165,7 +165,7 @@ app.post('/updateroster', upload.any(), async (req, res) => {
 });
 
 
-app.post('/deleteroster', (req, res) => {
+app.post('/createroster', (req, res) => {
 
   Detail.findByIdAndRemove(req.body.prodId, (err, data) => {
 

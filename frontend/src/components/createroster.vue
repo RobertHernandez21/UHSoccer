@@ -78,7 +78,7 @@
         formData.append('upl', this.$refs.upl.files[0]);
   
         try {
-          await axios.post(`${apiURL}/updateroster`, formData);
+          await axios.post(`${apiURL}/createroster`, formData);
           this.fetchData();
         } catch (error) {
           console.error('Error uploading data:', error);
@@ -86,7 +86,7 @@
       },
       async fetchData() {
         try {
-          const response = await axios.get(`${apiURL}/updateroster`);
+          const response = await axios.get(`${apiURL}/createroster`);
           console.log('Fetched data:', response.data); // Add this line
           this.data = response.data;
         } catch (error) {
