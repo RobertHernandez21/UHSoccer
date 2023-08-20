@@ -1,61 +1,46 @@
 <template>
-    <div class="container">
-      <div class="row">
-        <h2>Add Data</h2>
-  
-        <form @submit.prevent="uploadData" enctype="multipart/form-data">
-          <div class="form-group row">
-            <div class="col-md-1">
-              <label for="title" class="col-sm-2 col-form-label">Title</label>
-            </div>
-            <div class="col-sm-3">
-              <input v-model="title" type="text" name="title" placeholder="title" class="form-control" required>
-            </div>
-          </div>
-          <div class="form-group row">
-  <div class="col-md-1">
-    <label for="position" class="col-sm-2 col-form-label">Position</label>
-  </div>
-  <div class="col-sm-3">
-    <input v-model="position" type="text" name="position" placeholder="position" class="form-control" required>
-  </div>
-</div>
-<div class="form-group row">
-  <div class="col-md-1">
-    <label for="number" class="col-sm-2 col-form-label">Number</label>
-  </div>
-  <div class="col-sm-3">
-    <input v-model="number" type="number" name="number" placeholder="number" class="form-control" required>
-  </div>
-</div>           
-          <div class="form-group row">
-            <div class="col-lg-2">
-              <input type="file" ref="upl" class="form-control-file" accept="image/*" required>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-2">
-              <button type="submit" class="btn btn-primary">Upload</button>
-            </div>
-          </div>
-        </form>
+   
+  <div class="container mx-auto mt-12">
+    <h2 class="text-2xl mb-4">Add Data</h2>
+
+    <form @submit.prevent="uploadData" enctype="multipart/form-data">
+      <div class="mb-4">
+        <label for="title" class="block font-medium mb-1">Name</label>
+        <input v-model="title" type="text" name="title" placeholder="Name" class="form-input" required>
       </div>
-      <div class="row">
-        <div v-for="item in data" :key="item._id" class="col-md-4">
+      <div class="mb-4">
+        <label for="position" class="block font-medium mb-1">Position</label>
+        <input v-model="position" type="text" name="position" placeholder="Position" class="form-input" required>
+      </div>
+      <div class="mb-4">
+        <label for="number" class="block font-medium mb-1">Number</label>
+        <input v-model="number" type="number" name="number" placeholder="Number" class="form-input" required>
+      </div>
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Image</label>
+        <input type="file" ref="upl" accept="image/*" required>
+      </div>
+      <button type="submit" class="btn btn-green">Upload</button>
+    </form>
+
+    <div class="mt-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div v-for="item in data" :key="item._id" class="col-md-3">
           <div class="thumbnail">
             <div class="caption">
-              <h3>{{ item.Name }}</h3>
-              <h3>{{ item.Position }}</h3>
-              <h3>{{ item.Number }}</h3>
-              <img :src=" 'http://localhost:3001/uploads/' + item.image1" class="img-thumbnail">
+              <h3 class="text-xl">{{ item.Name }}</h3>
+              <h3 class="text-md">{{ item.Position }}</h3>
+              <h3 class="text-md">{{ item.Number }}</h3>
+              <img :src="'http://localhost:3001/uploads/' + item.image1" class="img-thumbnail">
               <br>
-              <button @click="deleteItem(item._id)" class="btn btn-danger">Delete</button>
+              <button @click="deleteItem(item._id)" class="mt-2 btn btn-red">Delete</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
   import axios from 'axios';
@@ -113,5 +98,32 @@
     width: 100px;
     height: 100px;
   }
+  .btn-green {
+  background-color: #48bb78; /* Set your desired green color */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-green:hover {
+  background-color: #38a169; /* Darker shade on hover */
+}
+
+.btn-red {
+  background-color: #e53e3e; /* Set your desired red color */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-red:hover {
+  background-color: #c53030; /* Darker shade on hover */
+}
   </style>
   

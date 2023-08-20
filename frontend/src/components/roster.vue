@@ -13,9 +13,13 @@
         </div>
       </div>
     </div>
-    <div class="text-center mt-8">
-      <router-link class="link text-xl hover:underline" :to="{name: 'createroster'}">Update Roster</router-link> 
-    </div>
+    <div class="text-center mt-8 mb-4">
+  <router-link :to="{ name: 'createroster' }">
+    <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+      Update Roster
+    </button>
+  </router-link>
+</div>
   </div>
 </template>
 
