@@ -50,6 +50,11 @@ const router = createRouter({
       name: 'createroster',
       component: () => import('@/components/createroster.vue'),
     },
+    {
+      path: '/donate',
+      name: 'donate',
+      component: () => import('@/components/donate.vue'),
+    },
   ]
 })
 
