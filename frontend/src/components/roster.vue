@@ -1,20 +1,20 @@
 <template>
-   <div class="container mx-auto mt-8 py-8">
+   <div class="container mx-auto mt-12">
     <h1 class="text-3xl text-red-500 mb-12 text-center">UH Men's Soccer Club Roster</h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-1">
-      <div v-for="item in data" :key="item._id" class="col-md-3">
-  <div class="thumbnail">
-    <div class="caption p-4 flex flex-col">
-      <img :src="getImageUrl(item.image1)" class=" object-cover w-52 h-64 ml-10">
-      <div class="mt-2 ml-10"> <!-- Add margin-left for shifting to the right -->
-        <h3 class="text-lg">{{ item.Name }}</h3>
-        <h3 class="text-md">{{ item.Position }}</h3>
-        <h3 class="text-md">{{ item.Number }}</h3>
+    <div class="grid grid-cols-4 gap-8">
+      <div v-for="item in data" :key="item._id">
+        <div class="thumbnail">
+          <div class="caption text-center">
+            <img :src="getImageUrl(item.image1)" class="w-full h-auto object-cover rounded-lg">
+            <h3 class="mt-2 text-xl">{{ item.Name }}</h3>
+            <p class="text-gray-500">{{ item.Position }}</p>
+            <p class="text-gray-500">{{ item.Number }}</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
+    <div class="text-center mt-8">
+      <router-link class="link text-xl hover:underline" :to="{name: 'createroster'}">Update Roster</router-link> 
     </div>
   </div>
 </template>
