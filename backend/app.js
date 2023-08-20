@@ -165,17 +165,19 @@ app.post('/createroster', upload.any(), async (req, res) => {
 });
 
 
-app.post('/createroster', (req, res) => {
+app.post('/deleteroster', async (req, res) => {
+  try {
+    const data = await Detail.findByIdAndRemove(req.body.prodId);
 
-  Detail.findByIdAndRemove(req.body.prodId, (err, data) => {
-
-    // console.log(data);
-    // remove file from upload folder which is deleted
+    // Remove the file from the upload folder which is deleted
     fs.unlinkSync(`./uploads/${data.image1}`);
-    
 
-  })
-  res.redirect('/');
+    res.redirect('/');
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'An error occurred' });
+  }
 });
+ 
 
 

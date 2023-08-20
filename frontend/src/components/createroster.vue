@@ -95,7 +95,7 @@
       },
       async deleteItem(itemId) {
         try {
-          await axios.post('/delete', { prodId: itemId });
+          await axios.post(`${apiURL}/deleteroster`, { prodId: itemId });
           this.fetchData();
         } catch (error) {
           console.error('Error deleting item:', error);
