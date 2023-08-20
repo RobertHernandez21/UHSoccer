@@ -2,7 +2,12 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan') 
 const Event = require('./models/event')
-
+let multer = require('multer'),
+  bodyParser = require('body-parser'),
+  path = require('path');
+var fs = require('fs'); // file system, to save files
+let Detail = require('./models/detail');
+let dir = './uploads';
 const cors = require('cors')
 
 require('dotenv').config()
@@ -95,12 +100,84 @@ app.delete('/event/:id', async(req,res) =>{
   }
 })
 
-// error handler
-app.use(function (err, req, res, next) {
-  // logs error and error code to console
-  console.error(err.message, req)
-  if (!err.statusCode) {
-    err.statusCode = 500
+let upload = multer({
+  storage: multer.diskStorage({
+
+    destination: (req, file, callback) => {
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+      }
+      callback(null, './uploads');
+    },
+    filename: (req, file, callback) => { callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); }
+
+  }),
+
+  fileFilter: (req, file, callback) => {
+    let ext = path.extname(file.originalname)
+    if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+      return callback(/*res.end('Only images are allowed')*/ null, false)
+    }
+    callback(null, true)
   }
-  res.status(err.statusCode).send(err.message)
-})
+});
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/uploads', express.static('uploads'));
+
+// view engine setup
+
+
+app.get('/createroster', async (req, res) => {
+  try {
+    const detail = await Detail.find({})
+    res.status(200).json(detail)
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: error.message})
+  }
+});
+
+app.post('/createroster', upload.any(), async (req, res) => {
+  try {
+    if (!req.body && !req.files) {
+      return res.json({ success: false });
+    }
+
+    const data = await Detail.findOne().sort({ _id: -1 }).limit(1);
+    const c = data ? data.unique_id + 1 : 1;
+
+    const detail = new Detail({
+      unique_id: c,
+      Name: req.body.title,
+      Position: req.body.position, 
+      Number: req.body.number, 
+      image1: req.files[0] && req.files[0].filename ? req.files[0].filename : ''
+    });
+
+    await detail.save();
+    res.redirect('/createroster');
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'An error occurred' });
+  }
+});
+
+
+app.post('/deleteroster', async (req, res) => {
+  try {
+    const data = await Detail.findByIdAndRemove(req.body.prodId);
+
+    // Remove the file from the upload folder which is deleted
+    fs.unlinkSync(`./uploads/${data.image1}`);
+
+    res.redirect('/');
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'An error occurred' });
+  }
+});
+ 
+
+
