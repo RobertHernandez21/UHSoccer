@@ -59,6 +59,7 @@
 <script>
 import axios from 'axios'
 const apiURL = import.meta.env.VITE_ROOT_API
+import { useAuthStore } from "@/store/auth"
 export default {  
     data() {
     return {
@@ -84,6 +85,10 @@ export default {
       return this.emailIsValid && this.passwordIsValid
     }
   },
+  setup() {
+    const authStore = useAuthStore();
+    return { authStore };
+  },
   methods: {
     submitForm() {
       axios.post(`${apiURL}/user`, this.user)
@@ -94,7 +99,19 @@ export default {
           .catch((error) => {
             console.log(error)
           })
+          if (this.user.email === 'user1234@gmail.com' && this.user.password === 'User1234') {   
+        return useAuthStore().isAuth = true
+      }
+      else if(this.user.email === 'reader1234@gmail.com' && this.user.password === 'Reader1234') {  
+        this.$router.push( '/' )
+        return useAuthStore().isReader = true
+        
+      } else {
+    // Display error message when password is incorrect
+    alert('Incorrect email or password.')
+  }
         }}
+        
 }
 </script>
 

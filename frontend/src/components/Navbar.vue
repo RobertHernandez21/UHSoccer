@@ -35,6 +35,12 @@
     <li class="md:mx-4 md:my-0 my-6">
         <router-link @click="MenuOpen()" class="link text-xl hover:underline" :to="{name: 'login'}">Login</router-link>
     </li>
+    <li v-show="authStore.isAuth">
+              <router-link to="/intakeform">
+                <span style="position: relative; top: 6px" class="material-icons">people</span>
+                Client Intake Form
+              </router-link>
+            </li>
     <Button> 
       <router-link class="link text-xl" :to="{name: 'events'}">Get Started</router-link> 
     </Button>
@@ -45,13 +51,15 @@
 <script>
 import { ref } from '@vue/reactivity'
 import Button from './button.vue'
+import { useAuthStore } from "@/store/auth"
 export default {
     components:{
         Button
     },
 setup() {
  let open = ref(false)   
-
+ const authStore = useAuthStore();
+    return { authStore };
  function MenuOpen(){
  open.value = !open.value
  }
