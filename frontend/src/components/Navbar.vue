@@ -32,6 +32,9 @@
     <li class="md:mx-4 md:my-0 my-6">
         <router-link @click="MenuOpen()" class="link text-xl hover:underline" :to="{name: 'donate'}">Donate</router-link>
     </li>
+    <li class="md:mx-4 md:my-0 my-6">
+        <router-link @click="MenuOpen()" class="link text-xl hover:underline" :to="{name: 'login'}">Login</router-link>
+    </li>
     <Button> 
       <router-link class="link text-xl" :to="{name: 'events'}">Get Started</router-link> 
     </Button>

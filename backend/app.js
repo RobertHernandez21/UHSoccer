@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan') 
 const Event = require('./models/event')
+const User = require('./models/userModel')
 let multer = require('multer'),
   bodyParser = require('body-parser'),
   path = require('path');
@@ -178,6 +179,19 @@ app.post('/deleteroster', async (req, res) => {
     res.status(500).json({ success: false, message: 'An error occurred' });
   }
 });
+
+app.post('/user' , async(req,res) =>{
+  try {
+    const user = await User.findOne({email: req.body.email})
+    if (user.password === req.body.password){
+      res.send("logged in")
+    }
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: error.message})
+  }
+})
  
 
 

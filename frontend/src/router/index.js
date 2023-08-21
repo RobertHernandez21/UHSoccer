@@ -55,6 +55,11 @@ const router = createRouter({
       name: 'donate',
       component: () => import('@/components/donate.vue'),
     },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/components/login.vue'),
+    },
   ]
 })
 
