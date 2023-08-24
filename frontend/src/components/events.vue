@@ -19,7 +19,7 @@
           </thead>
           <tbody class="divide-y divide-gray-300">
             <tr
-            @click="editEvent(event._id)"
+            @click="authStore.isAuth ? editEvent(event._id) : null"
               v-for="event in events"
               :key="event._id"
             >
@@ -42,6 +42,8 @@
 import axios from 'axios';
 const apiURL = import.meta.env.VITE_ROOT_API
 import { DateTime } from 'luxon'
+import { useAuthStore } from "@/store/auth"
+
 export default {
   name:'Event',
   data(){
@@ -49,6 +51,10 @@ export default {
     events:[]
   }
 },
+setup() {
+    const authStore = useAuthStore();
+    return { authStore };
+  },
 mounted() {
     this.getEvents()
   },

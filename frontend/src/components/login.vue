@@ -95,21 +95,37 @@ export default {
     .then(() => {
             alert('You are logged in!.')
             this.$router.push( '/' )
+            useAuthStore().isAuth = true
+        localStorage.setItem('isAuth', 'true')
           })
           .catch((error) => {
             console.log(error)
           })
           if (this.user.email === 'user1234@gmail.com' && this.user.password === 'User1234') {   
-        return useAuthStore().isAuth = true
+            this.authStore.setIsAuth(true);
+            // Update Local Storage
+            localStorage.setItem('auth', JSON.stringify({
+                isAuth: true,
+                isReader: this.authStore.isReader
+            }));
       }
       else if(this.user.email === 'reader1234@gmail.com' && this.user.password === 'Reader1234') {  
-        this.$router.push( '/' )
-        return useAuthStore().isReader = true
+        this.authStore.setIsReader(true);
+            // Update Local Storage
+            localStorage.setItem('auth', JSON.stringify({
+                isAuth: this.authStore.isAuth,
+                isReader: true
+            }));
         
       } else {
     // Display error message when password is incorrect
     alert('Incorrect email or password.')
   }
+  const authState = {
+            isAuth: this.authStore.isAuth,
+            isReader: this.authStore.isReader
+        };
+        localStorage.setItem('auth', JSON.stringify(authState));
         }}
         
 }

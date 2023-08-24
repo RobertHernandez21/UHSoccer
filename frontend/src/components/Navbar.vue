@@ -30,15 +30,13 @@
         <router-link @click="MenuOpen()" class="link text-xl hover:underline" :to="{name: 'donate'}">Donate</router-link>
     </li>
     <li class="md:mx-4 md:my-0 my-6" v-if="!authStore.isAuth && !authStore.isReader">
-        <router-link @click="MenuOpen()" class="link text-xl hover:underline" :to="{name: 'login'}">
-         Login
-        </router-link>
-    </li>
-    <li class="md:mx-4 md:my-0 my-6" v-if="authStore.isAuth">
-              <router-link  @click="MenuOpen()" class="link text-xl hover:underline" :to="{name: 'home'}">
-              <button @click="authStore.isAuth = false">Logout</button>
-              </router-link>
-    </li>
+  <router-link @click="MenuOpen()" class="link text-xl hover:underline" :to="{name: 'login'}">
+    Login
+  </router-link>
+</li>
+<li class="md:mx-4 md:my-0 my-6" v-if="authStore.isAuth">
+  <button @click="logout" class="link text-xl hover:underline">Logout</button>
+</li>
     <Button> 
       <router-link class="link text-xl" :to="{name: 'events'}">Get Started</router-link> 
     </Button>
@@ -63,6 +61,14 @@ setup() {
  }
 
  return{open,MenuOpen}
+},
+methods: {
+  logout() {
+    useAuthStore().isAuth = false
+    localStorage.removeItem('isAuth')
+    localStorage.removeItem('isReader')
+    this.$router.push('/')
+  }
 }
     
 }
