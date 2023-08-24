@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import { useAuthStore } from "@/store/auth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,22 +33,44 @@ const router = createRouter({
       path: '/eventdetails/:id',
       name: 'eventdetails',
       props: true,
-      component: () => import('@/components/eventdetails.vue')
+      component: () => import('@/components/eventdetails.vue'),
+      beforeEnter: (to, from, next) => {
+        const authStore = useAuthStore();
+        if (authStore.isAuth) {
+          // User is authenticated, allow access
+          next();
+        }
+        else{alert('Unauthorized User.')
+        next({ name: "home" });}
+    }
     },
     {
       path: '/eventform',
       name: 'eventform',
       component: () => import('@/components/eventform.vue'),
-    },
-    {
-      path: '/updateroster',
-      name: 'updateroster',
-      component: () => import('@/components/updateroster.vue'),
+      beforeEnter: (to, from, next) => {
+        const authStore = useAuthStore();
+        if (authStore.isAuth) {
+          // User is authenticated, allow access
+          next();
+        }
+        else{alert('Unauthorized User.')
+        next({ name: "home" });}
+    }
     },
     {
       path: '/createroster',
       name: 'createroster',
       component: () => import('@/components/createroster.vue'),
+      beforeEnter: (to, from, next) => {
+        const authStore = useAuthStore();
+        if (authStore.isAuth) {
+          // User is authenticated, allow access
+          next();
+        }
+        else{alert('Unauthorized User.')
+        next({ name: "home" });}
+    }
     },
     {
       path: '/donate',
