@@ -1,6 +1,10 @@
 <template>
    <div class="container mx-auto mt-12">
-    <h1 class="text-3xl text-red-500 mb-12 text-center">UH Men's Soccer Club Roster</h1>
+    <h1
+        class="font-bold text-4xl text-red-700 tracking-widest text-center mt-10 mb-12"
+      >
+       Club Roster
+      </h1>
     <div class="grid grid-cols-4 gap-8">
       <div v-for="item in data" :key="item._id">
         <div class="thumbnail">
