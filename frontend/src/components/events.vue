@@ -55,8 +55,9 @@ mounted() {
 methods:{
   getEvents() {
       axios.get(`${apiURL}/event`).then((res) => {
-        this.events = res.data
-        console.log(this.events)
+        this.events = res.data.sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+        })
       })
       window.scrollTo(0, 0)
     },
