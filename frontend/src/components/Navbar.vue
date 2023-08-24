@@ -24,23 +24,21 @@
         <router-link @click="MenuOpen()" class="link text-xl hover:underline" :to="{name: 'roster'}">Roster</router-link> 
     </li>
     <li class="md:mx-4 md:my-0 my-6">
-        <router-link @click="MenuOpen()" class="link text-xl hover:underline" :to="{name: 'events'}">Events</router-link>
-    </li>
-    <li class="md:mx-4 md:my-0 my-6">
         <router-link @click="MenuOpen()" class="link text-xl hover:underline" :to="{name: 'contact'}">Contact From</router-link>
     </li>
     <li class="md:mx-4 md:my-0 my-6">
         <router-link @click="MenuOpen()" class="link text-xl hover:underline" :to="{name: 'donate'}">Donate</router-link>
     </li>
-    <li class="md:mx-4 md:my-0 my-6">
-        <router-link @click="MenuOpen()" class="link text-xl hover:underline" :to="{name: 'login'}">Login</router-link>
+    <li class="md:mx-4 md:my-0 my-6" v-if="!authStore.isAuth && !authStore.isReader">
+        <router-link @click="MenuOpen()" class="link text-xl hover:underline" :to="{name: 'login'}">
+         Login
+        </router-link>
     </li>
-    <li v-show="authStore.isAuth">
-              <router-link to="/intakeform">
-                <span style="position: relative; top: 6px" class="material-icons">people</span>
-                Client Intake Form
+    <li class="md:mx-4 md:my-0 my-6" v-if="authStore.isAuth">
+              <router-link  @click="MenuOpen()" class="link text-xl hover:underline" :to="{name: 'home'}">
+              <button @click="authStore.isAuth = false">Logout</button>
               </router-link>
-            </li>
+    </li>
     <Button> 
       <router-link class="link text-xl" :to="{name: 'events'}">Get Started</router-link> 
     </Button>
