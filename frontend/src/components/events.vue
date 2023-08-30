@@ -2,24 +2,30 @@
   <div
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10"
     >
-      <div class="ml-10">
-        <h2 class="text-2xl font-bold">List of Events</h2>
-        
-      </div>
+    <h1
+        class="font-bold text-4xl text-red-700 tracking-widest text-center mt-10 mb-12"
+      >
+       
+      </h1>
       <div class="flex flex-col col-span-2">
+        <h1
+        class="font-bold text-4xl text-red-700 tracking-widest text-center mt-10 mb-12"
+      >
+       Game Schedule
+      </h1>
         <table class="min-w-full shadow-md rounded">
           <thead class="bg-gray-50 text-xl">
             <tr>
-              <th class="p-4 text-left">Event Date</th>
-              <th class="p-4 text-left">Event Location</th>
-              <th class="p-4 text-left">Event Time</th>
-              <th class="p-4 text-left">Event opponent</th>
-              <th class="p-4 text-left">Event Result</th>
+              <th class="p-4 text-left">Date</th>
+              <th class="p-4 text-left">Location</th>
+              <th class="p-4 text-left">Time</th>
+              <th class="p-4 text-left">Opponent</th>
+              <th class="p-4 text-left">Result</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-300">
             <tr
-            @click="editEvent(event._id)"
+            @click="authStore.isAuth ? editEvent(event._id) : null"
               v-for="event in events"
               :key="event._id"
             >
@@ -32,9 +38,13 @@
           </tbody>
         </table>
       </div>
-      <Button> 
-      <router-link class="link text-xl" :to="{name: 'eventform'}">Get Started</router-link> 
-    </Button>
+      <div class="text-center mt-8 mb-4">
+  <router-link :to="{ name: 'eventform' }">
+    <button  v-if=authStore.isAuth class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+      Update Schedule
+    </button>
+  </router-link>
+</div>
     </div>
 </template>
 
@@ -42,6 +52,8 @@
 import axios from 'axios';
 const apiURL = import.meta.env.VITE_ROOT_API
 import { DateTime } from 'luxon'
+import { useAuthStore } from "@/store/auth"
+
 export default {
   name:'Event',
   data(){
@@ -49,14 +61,19 @@ export default {
     events:[]
   }
 },
+setup() {
+    const authStore = useAuthStore();
+    return { authStore };
+  },
 mounted() {
     this.getEvents()
   },
 methods:{
   getEvents() {
       axios.get(`${apiURL}/event`).then((res) => {
-        this.events = res.data
-        console.log(this.events)
+        this.events = res.data.sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+        })
       })
       window.scrollTo(0, 0)
     },

@@ -1,6 +1,17 @@
 <template>
    <div class="container mx-auto mt-12">
-    <h1 class="text-3xl text-red-500 mb-12 text-center">UH Men's Soccer Club Roster</h1>
+    <h1
+        class="font-bold text-4xl text-red-700 tracking-widest text-center mt-10 mb-12"
+      >
+       Club Roster
+      </h1>
+      <div class="text-center mt-8 mb-4">
+        <router-link :to="{ name: 'createroster' }">
+        <button  v-if=authStore.isAuth class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+        Update Roster
+        </button>
+        </router-link>
+      </div>
     <div class="grid grid-cols-4 gap-8">
       <div v-for="item in data" :key="item._id">
         <div class="thumbnail">
@@ -13,25 +24,23 @@
         </div>
       </div>
     </div>
-    <div class="text-center mt-8 mb-4">
-  <router-link :to="{ name: 'createroster' }">
-    <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
-      Update Roster
-    </button>
-  </router-link>
-</div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 const apiURL = import.meta.env.VITE_ROOT_API;
+import { useAuthStore } from "@/store/auth"
 export default {
   name: 'roster',
   data() {
     return {
       data: [],
     };
+  },
+  setup() {
+    const authStore = useAuthStore();
+    return { authStore };
   },
   methods: {
     async fetchData() {
