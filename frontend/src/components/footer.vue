@@ -1,7 +1,7 @@
 <template>
-    <footer class="bg-gray-800 text-white py-8">
+    <footer class="bg-red-600 text-white py-8">
       <div class="container mx-auto text-center">
-        <img src="/path/to/footer-logo.png" alt="Footer Logo" class="w-24 mx-auto mb-4">
+        <img src="@/assets/crest.png" alt="Footer Logo" class="w-24 mx-auto mb-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <h2 class="text-lg font-semibold mb-2">About Us</h2>
@@ -14,6 +14,7 @@
           <div>
             <h2 class="text-lg font-semibold mb-2">Stay Connected</h2>
             <p class="text-sm">Follow us on social media to get updates about upcoming matches, events, and more.</p>
+            <font-awesome-icon icon="fa-solid fa-user-secret" />
           </div>
         </div>
       </div>
